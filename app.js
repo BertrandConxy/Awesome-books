@@ -1,50 +1,93 @@
 //  getting info from the from input fields
-const arrayOfBooks = [{title: 'kill it'},
-;
-];
-const title = document.querySelector('#title');
-const author = document.querySelector('#author');
-const addBtn = document.querySelector('#submit');
-function storingBookInfo () {
-    addBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        const book = {
-            title: title.value,
-            author: author.value,
-        }
-     arrayOfBooks.push(book);
-     console.log(arrayOfBooks);
-     return arrayOfBooks;
-     
-    
-});
-}
- 
-function createHtmlElement () {
-
-    const form = document.querySelector('#form')
-    const bookList = document.createElement('div');
-    const bookTitle = document.createElement('h4');
-    bookTitle.textContent = `${arrayOfBooks[0].title}`
-    const bookAuthor = document.createElement('h4');
-    const removeBtn = document.createElement('button');
-    const hr = document.createElement('hr');
-    bookList.append(bookTitle,bookAuthor,removeBtn,hr);
-    document.body.insertBefore(bookList, form); 
-
-    
-}
 
 
-
-
-storingBookInfo ()
-for(let i = 0; i < arrayOfBooks.length; i++){
-    if (arrayOfBooks.length === 0) {
-        alert('no books')
-    } 
-    else {
-createHtmlElement ()
-console.log(arrayOfBooks)
+function addBook(title, author) {
+    const object = {
+        title: title.value,
+        author: author.value,
     }
+
+    
+    return object
+
 }
+
+function getbooksFromStore() {
+    let books;
+    if(localStorage.getItem('books') === null) {
+        books = [];
+    } else {
+        books = JSON.parse(localStorage.getItem('books'));
+    }
+    return books;
+}
+function addbookToStore (book) {
+    const books = getbooksFromStore();
+    books.push(book);
+    localStorage.setItem('books', JSON.stringify(books));
+    console.log(books)
+}
+
+function displayBooks (book) {
+    const books = getbooksFromStore();
+    books.forEach((book) => {
+        const formContainer = document.querySelector('#form-container');
+        const listContainer = document.createElement('div');
+        listContainer.innerHTML +=`
+        <h4>${book.title}</h4>
+        <h4>${book.author}</h4>
+        <button class='delete'>Remove</button>
+        <hr>`;
+
+        document.body.insertBefore(listContainer, formContainer);
+    });
+}
+
+function removeBook (target) {
+    target.parentElement.parentElement.remove()
+}
+
+// Adding book 
+document.addEventListener('DOMContentLoaded', displayBooks)
+document.querySelector('#form').addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const title = document.getElementById('title');
+    const author = document.getElementById('author');
+
+
+
+// validate
+if (title.value === '' || author.value === '') {
+
+} else {
+     // instantiate book
+      console.log(addBook(title,author));
+    const book = addBook(title,author);
+    addbookToStore(book);
+    displayBooks(book)
+}
+});
+
+
+
+// event: remove a book
+
+
+// Remove book from UI
+const removeBtn = document.querySelectorAll('h4')
+console.log(removeBtn)
+removeBtn.forEach((btn) => {
+    btn.addEventListener('click', (e) => {
+        removeBook(e.target);
+        // remove book from the store
+    
+        
+    
+    
+    
+               //  alert for book added
+
+    
+    });
+})
