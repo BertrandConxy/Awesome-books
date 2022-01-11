@@ -21,7 +21,6 @@ function addbookToStore (book) {
     const books = getbooksFromStore();
     books.push(book);
     localStorage.setItem('books', JSON.stringify(books));
-    console.log(books)
 }
 
 function displayBooks () {
@@ -30,8 +29,8 @@ function displayBooks () {
         const bookContainer = document.querySelector('.book-list');
         const listContainer = document.createElement('div');
         listContainer.innerHTML +=`
-        <h4>${book.title}</h4>
-        <h4>${book.author}</h4>
+        <p>${book.title}</p>
+        <p>${book.author}</p>
         <button class='delete'>Remove</button>
         <hr>`;
 
@@ -48,19 +47,8 @@ function removeBook (target) {
 function removeFromTheStore (title) {
     const books = getbooksFromStore();
     const filteredArray = books.filter((book) => book.title !== title);
-    console.log(filteredArray);
-    // books.forEach((book, index)=> {
-    //     if (book.title === title) {
-    //         books.splice(index,1)
-    //     }
-    // })
     localStorage.setItem('books', JSON.stringify(filteredArray));
-    
-
 }
-
-
-
 
 document.addEventListener('DOMContentLoaded', displayBooks)
 document.querySelector('#form').addEventListener('submit', (e) => {
@@ -69,13 +57,6 @@ document.querySelector('#form').addEventListener('submit', (e) => {
     const title = document.getElementById('title');
     const author = document.getElementById('author');
 
-
-// validate
-if (title.value === '' || author.value === '') {
-    alert('fill all inputs')
-} else {
-     // Adding book process
-      console.log(createBook(title,author));
     //   create book
     const book = createBook(title,author);
     // add it to store
@@ -84,14 +65,15 @@ if (title.value === '' || author.value === '') {
     const bookContainer = document.querySelector('.book-list');
     const listContainer = document.createElement('div');
     listContainer.innerHTML +=`
-    <h4>${book.title}</h4>
-    <h4>${book.author}</h4>
+    <p>${book.title}</p>
+    <p>${book.author}</p>
     <button class='delete'>Remove</button>
     <hr>`;
     bookContainer.appendChild(listContainer);
 
-    
-}
+    const form = document.querySelector('#form');
+    form.reset()
+
 });
 
 // event: remove a book
@@ -102,8 +84,4 @@ document.querySelector('.book-list').addEventListener('click', (e) => {
 
  // remove book from the store
     removeFromTheStore(e.target.parentElement.firstElementChild.textContent)
-
-
-
-
 });
