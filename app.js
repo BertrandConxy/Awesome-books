@@ -1,12 +1,19 @@
-function createBook(title, author) {
-  const object = {
-    title: title.value,
-    author: author.value,
-  };
-  return object;
+// Creating book class
+
+class CreateBook {
+    constructor(title, author) {
+
+    this.title = title.value;
+    this.author = author.value;
 }
 
-function getbooksFromStore() {
+}
+
+// localStorage classes
+
+class localStorageClass {
+
+static getbooksFromStore() {
   let books;
   if (localStorage.getItem('books') === null) {
     books = [];
@@ -15,25 +22,20 @@ function getbooksFromStore() {
   }
   return books;
 }
-function addbookToStore(book) {
-  const books = getbooksFromStore();
+
+static addbookToStore(book) {
+  const books = localStorageClass.getbooksFromStore();
   books.push(book);
   localStorage.setItem('books', JSON.stringify(books));
 }
 
-function displayBooks() {
-  const books = getbooksFromStore();
-  books.forEach((book) => {
-    const bookContainer = document.querySelector('.book-list');
-    const listContainer = document.createElement('div');
-    listContainer.innerHTML += `
-        <p>${book.title}</p>
-        <p>${book.author}</p>
-        <button class='delete'>Remove</button>
-        <hr>`;
 
-    bookContainer.appendChild(listContainer);
-  });
+
+static removeFromTheStore(title) {
+    const books = localStorageClass.getbooksFromStore();
+    const filteredArray = books.filter((book) => book.title !== title);
+    localStorage.setItem('books', JSON.stringify(filteredArray));
+  }
 }
 
 function removeBook(target) {
@@ -41,12 +43,21 @@ function removeBook(target) {
     target.parentElement.remove();
   }
 }
+static displayBooks() {
+    const books = localStorageClass.getbooksFromStore();
+    books.forEach((book) => {
+      const bookContainer = document.querySelector('.book-list');
+      const listContainer = document.createElement('div');
+      listContainer.innerHTML += `
+          <p>${book.title}</p>
+          <p>${book.author}</p>
+          <button class='delete'>Remove</button>
+          <hr>`;
+  
+      bookContainer.appendChild(listContainer);
+    });
+  }
 
-function removeFromTheStore(title) {
-  const books = getbooksFromStore();
-  const filteredArray = books.filter((book) => book.title !== title);
-  localStorage.setItem('books', JSON.stringify(filteredArray));
-}
 
 document.addEventListener('DOMContentLoaded', displayBooks);
 document.querySelector('#form').addEventListener('submit', (e) => {
@@ -56,7 +67,7 @@ document.querySelector('#form').addEventListener('submit', (e) => {
   const author = document.getElementById('author');
 
   //   create book
-  const book = createBook(title, author);
+  const book = new CreateBook(title, author);
   // add it to store
   addbookToStore(book);
   // display it
