@@ -38,28 +38,33 @@ static removeFromTheStore(title) {
   }
 }
 
-function removeBook(target) {
-  if (target.classList.contains('delete')) {
-    target.parentElement.remove();
-  }
-}
+// display class
+
+class displayBookList {
+
 static displayBooks() {
     const books = localStorageClass.getbooksFromStore();
     books.forEach((book) => {
       const bookContainer = document.querySelector('.book-list');
       const listContainer = document.createElement('div');
+      listContainer.className = "list-Container"
       listContainer.innerHTML += `
-          <p>${book.title}</p>
-          <p>${book.author}</p>
+          <p>"${book.title}" by ${book.author}</p>
           <button class='delete'>Remove</button>
-          <hr>`;
+          `;
   
       bookContainer.appendChild(listContainer);
     });
   }
 
+  static removeBook(target) {
+    if (target.classList.contains('delete')) {
+      target.parentElement.remove();
+    }
 
-document.addEventListener('DOMContentLoaded', displayBooks);
+}
+}
+document.addEventListener('DOMContentLoaded', displayBookList.displayBooks);
 document.querySelector('#form').addEventListener('submit', (e) => {
   e.preventDefault();
 
@@ -69,15 +74,15 @@ document.querySelector('#form').addEventListener('submit', (e) => {
   //   create book
   const book = new CreateBook(title, author);
   // add it to store
-  addbookToStore(book);
+  localStorageClass.addbookToStore(book);
   // display it
   const bookContainer = document.querySelector('.book-list');
   const listContainer = document.createElement('div');
+  listContainer.className = "list-Container"
   listContainer.innerHTML += `
-    <p>${book.title}</p>
-    <p>${book.author}</p>
+    <p>"${book.title}" by ${book.author}</p>
     <button class='delete'>Remove</button>
-    <hr>`;
+    `;
   bookContainer.appendChild(listContainer);
 
   const form = document.querySelector('#form');
@@ -88,8 +93,8 @@ document.querySelector('#form').addEventListener('submit', (e) => {
 
 // Remove book from UI
 document.querySelector('.book-list').addEventListener('click', (e) => {
-  removeBook(e.target);
+    displayBookList.removeBook(e.target);
 
   // remove book from the store
-  removeFromTheStore(e.target.parentElement.firstElementChild.textContent);
+  localStorageClass.removeFromTheStore(e.target.parentElement.firstElementChild.textContent);
 });
