@@ -47,15 +47,19 @@ function removeBook (target) {
 
 function removeFromTheStore (title) {
     const books = getbooksFromStore();
-    books.forEach((book, index)=> {
-        if (book.title === title) {
-            books.splice(index,1)
-        }
-    })
-    localStorage.setItem('books', JSON.stringify(books));
+    const filteredArray = books.filter((book) => book.title !== title);
+    console.log(filteredArray);
+    // books.forEach((book, index)=> {
+    //     if (book.title === title) {
+    //         books.splice(index,1)
+    //     }
+    // })
+    localStorage.setItem('books', JSON.stringify(filteredArray));
     
 
 }
+
+
 
 
 document.addEventListener('DOMContentLoaded', displayBooks)
@@ -72,8 +76,11 @@ if (title.value === '' || author.value === '') {
 } else {
      // Adding book process
       console.log(createBook(title,author));
+    //   create book
     const book = createBook(title,author);
+    // add it to store
     addbookToStore(book);
+    // display it
     const bookContainer = document.querySelector('.book-list');
     const listContainer = document.createElement('div');
     listContainer.innerHTML +=`
@@ -82,6 +89,8 @@ if (title.value === '' || author.value === '') {
     <button class='delete'>Remove</button>
     <hr>`;
     bookContainer.appendChild(listContainer);
+
+    
 }
 });
 
