@@ -1,54 +1,71 @@
-function createBook(title, author) {
-  const object = {
-    title: title.value,
-    author: author.value,
-  };
-  return object;
-}
+// Creating book class
 
-function getbooksFromStore() {
-  let books;
-  if (localStorage.getItem('books') === null) {
-    books = [];
-  } else {
-    books = JSON.parse(localStorage.getItem('books'));
+/* eslint-disable max-classes-per-file */
+class CreateBook {
+  constructor(title, author) {
+    this.title = title.value;
+    this.author = author.value;
   }
-  return books;
-}
-function addbookToStore(book) {
-  const books = getbooksFromStore();
-  books.push(book);
-  localStorage.setItem('books', JSON.stringify(books));
 }
 
-function displayBooks() {
-  const books = getbooksFromStore();
-  books.forEach((book) => {
+// localStorage classes
+
+class LocalStorageClass {
+  static getbooksFromStore() {
+    let books;
+    if (localStorage.getItem('books') === null) {
+      books = [];
+    } else {
+      books = JSON.parse(localStorage.getItem('books'));
+    }
+    return books;
+  }
+
+  static addbookToStore(book) {
+    const books = LocalStorageClass.getbooksFromStore();
+    books.push(book);
+    localStorage.setItem('books', JSON.stringify(books));
+  }
+
+  static removeFromTheStore(title) {
+    const books = LocalStorageClass.getbooksFromStore();
+    const filteredArray = books.filter((book) => book.title !== title);
+    localStorage.setItem('books', JSON.stringify(filteredArray));
+  }
+}
+
+// class to create book element inside the book list
+
+class CreateBookElements {
+  static createBookElement(book) {
     const bookContainer = document.querySelector('.book-list');
     const listContainer = document.createElement('div');
+    listContainer.className = 'list-Container';
     listContainer.innerHTML += `
-        <p>${book.title}</p>
-        <p>${book.author}</p>
-        <button class='delete'>Remove</button>
-        <hr>`;
+            <p>"${book.title}" by ${book.author}</p>
+            <button class='delete'>Remove</button>
+            `;
 
     bookContainer.appendChild(listContainer);
-  });
-}
-
-function removeBook(target) {
-  if (target.classList.contains('delete')) {
-    target.parentElement.remove();
   }
 }
 
-function removeFromTheStore(title) {
-  const books = getbooksFromStore();
-  const filteredArray = books.filter((book) => book.title !== title);
-  localStorage.setItem('books', JSON.stringify(filteredArray));
+// display class
+
+class DisplayBookList {
+  static displayBooks() {
+    const books = LocalStorageClass.getbooksFromStore();
+    books.forEach((book) => CreateBookElements.createBookElement(book));
+  }
+
+  static removeBook(target) {
+    if (target.classList.contains('delete')) {
+      target.parentElement.remove();
+    }
+  }
 }
 
-document.addEventListener('DOMContentLoaded', displayBooks);
+document.addEventListener('DOMContentLoaded', DisplayBookList.displayBooks);
 document.querySelector('#form').addEventListener('submit', (e) => {
   e.preventDefault();
 
@@ -56,19 +73,12 @@ document.querySelector('#form').addEventListener('submit', (e) => {
   const author = document.getElementById('author');
 
   //   create book
-  const book = createBook(title, author);
-  // add it to store
-  addbookToStore(book);
-  // display it
-  const bookContainer = document.querySelector('.book-list');
-  const listContainer = document.createElement('div');
-  listContainer.innerHTML += `
-    <p>${book.title}</p>
-    <p>${book.author}</p>
-    <button class='delete'>Remove</button>
-    <hr>`;
-  bookContainer.appendChild(listContainer);
-
+  const book = new CreateBook(title, author);
+  // add it to local storage
+  LocalStorageClass.addbookToStore(book);
+  // append the book to the book list
+  CreateBookElements.createBookElement(book);
+  //  Reseting the form inputs
   const form = document.querySelector('#form');
   form.reset();
 });
@@ -77,8 +87,8 @@ document.querySelector('#form').addEventListener('submit', (e) => {
 
 // Remove book from UI
 document.querySelector('.book-list').addEventListener('click', (e) => {
-  removeBook(e.target);
+  DisplayBookList.removeBook(e.target);
 
   // remove book from the store
-  removeFromTheStore(e.target.parentElement.firstElementChild.textContent);
+  LocalStorageClass.removeFromTheStore(e.target.parentElement.firstElementChild.textContent);
 });
