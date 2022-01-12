@@ -16,7 +16,10 @@ a {
   color: black;
 }
 
-a:hover {
+a:hover,
+a:active,
+a:focus,
+a:enabled {
   color: rgb(20, 129, 231);
 }
 
@@ -32,13 +35,12 @@ ul.nav-list {
 .nav-item {
   margin: 0 9px;
   position: relative;
-  
 }
 
 .page {
   display: none;
   width: 100%;
-  min-height: 100%;
+  min-height: 70vh;
   padding: 16px 16px;
 }
 
@@ -72,10 +74,6 @@ input[type='submit'],
   margin-right: 20px;
 }
 
-p {
-  margin-left: 20px;
-}
-
 h1 {
   text-align: center;
 }
@@ -87,11 +85,6 @@ h2 {
 
 h2 {
   font-size: 27px;
-}
-
-#form-container {
-  flex-direction: column;
-  align-items: center;
 }
 
 input[type='submit'] {
@@ -117,12 +110,9 @@ input[type='text'] {
   height: 30px;
 }
 
-#contact-section {
-  align-items: center;
-  flex-direction: column;
-}
 p {
   font-weight: bold;
+  margin-left: 20px;
 }
 
 li {
@@ -130,5 +120,30 @@ li {
 }
 
 footer {
+  position: relative;
+  width: 100%;
+  bottom: 0;
   border: 3px solid black;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.contact-container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.contact-container,
+.form-container {
+  margin-top: 50px;
+}
+
+#date {
+  margin-top: 10px;
+  float: right;
 }

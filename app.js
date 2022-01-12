@@ -65,6 +65,29 @@ class DisplayBookList {
   }
 }
 
+// class to make the web app an SPA
+
+class DisplaySection {
+  constructor() {
+    this.pages = document.querySelectorAll('.page');
+  }
+
+  static DisplayOnly() {
+    // const page = document.querySelectorAll('.page')
+    const navItems = document.querySelectorAll('.nav-item');
+    navItems.forEach((item) => {
+      item.addEventListener('click', DisplaySection.nav);
+    });
+  }
+
+  static nav(e) {
+    e.preventDefault();
+    const currentPage = e.target.getAttribute('data-target');
+    document.querySelector('.active').classList.remove('active');
+    document.getElementById(currentPage).classList.add('active');
+  }
+}
+
 document.addEventListener('DOMContentLoaded', DisplayBookList.displayBooks);
 document.querySelector('#form').addEventListener('submit', (e) => {
   e.preventDefault();
@@ -92,3 +115,9 @@ document.querySelector('.book-list').addEventListener('click', (e) => {
   // remove book from the store
   LocalStorageClass.removeFromTheStore(e.target.parentElement.firstElementChild.textContent);
 });
+
+// displaying one section
+
+document.addEventListener('DOMContentLoaded', DisplaySection.DisplayOnly);
+
+document.getElementById('date').innerHTML = Date();

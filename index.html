@@ -18,12 +18,14 @@
             </ul>
         </nav>
     </header>
-    <section class="page active" id="home-page">
+    <span id="date"></span>
+    <section class="page active" id="home">
         <h1>All Awesome Books</h1>
         <div class="book-list"></div>
     </section>
 
-    <section class="page" id="form-container">
+    <section class="page" id="add-new">
+        <div class="form-container">
     <h2>Add a new book</h2>
     <form id="form">
         <label for="title"></label>
@@ -32,8 +34,10 @@
         <input type="text" id="author" placeholder="Author"> <br>
         <input type="submit" value="Add" id="submit">
     </form>
+   </div>
     </section>
-    <section class="page" id="contact-section">
+    <section class="page" id="contact">
+        <div class="contact-container">
         <h2>Contact Information</h2>
         <p>Do you have any questions or you just want to say "Hello"? <br> You can reach out to us!</p>
         <ul class="Contacts-list">
@@ -41,10 +45,11 @@
             <li>Our Phone Number: 00043522</li>
             <li>Our Address: New Town 345, Downing street, Uk.</li>
         </ul>
+    </div>
     </section>
 
     <footer>
-        <p>Copyright</p>
+        <p>Copyright: &copy; 2022, all rights are reserved by Butler and Bertrand</p>
     </footer>
 
     <script src="app.js"></script>
