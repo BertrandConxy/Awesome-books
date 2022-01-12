@@ -8,9 +8,22 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>All Awesome Books</h1>
-    <div class="book-list"></div>
-    <div id="form-container">
+    <header>
+        <div class="logo">Awesome Books</div>
+        <nav>
+            <ul class="nav-list">
+                <li ><a href="#" class="nav-item" data-target = "home">List</a></li> 
+                <li ><a href="#" class="nav-item" data-target = "add-new">Add New</a></li>
+                <li ><a href="#" class="nav-item" data-target = "contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    <section class="page" id="home-page">
+        <h1>All Awesome Books</h1>
+        <div class="book-list"></div>
+    </section>
+
+    <section class="page" id="form-container">
     <h2>Add a new book</h2>
     <form id="form">
         <label for="title"></label>
@@ -19,7 +32,7 @@
         <input type="text" id="author" placeholder="Author"> <br>
         <input type="submit" value="Add" id="submit">
     </form>
-    </div>
+    </section>
 
     <script src="app.js"></script>
 </body>
