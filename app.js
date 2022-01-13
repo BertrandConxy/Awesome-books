@@ -41,6 +41,7 @@ class CreateBookElements {
     const bookContainer = document.querySelector('.book-list');
     const listContainer = document.createElement('div');
     listContainer.className = 'list-Container';
+    listContainer.classList.add('flex');
     listContainer.innerHTML += `
             <p>"${book.title}" by ${book.author}</p>
             <button class='delete'>Remove</button>
@@ -68,12 +69,7 @@ class DisplayBookList {
 // class to make the web app an SPA
 
 class DisplaySection {
-  constructor() {
-    this.pages = document.querySelectorAll('.page');
-  }
-
   static DisplayOnly() {
-    // const page = document.querySelectorAll('.page')
     const navItems = document.querySelectorAll('.nav-item');
     navItems.forEach((item) => {
       item.addEventListener('click', DisplaySection.nav);

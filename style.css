@@ -1,5 +1,4 @@
 header {
-  display: flex;
   border: 3px solid black;
   justify-content: space-between;
 }
@@ -24,7 +23,6 @@ a:enabled {
 }
 
 ul.nav-list {
-  display: flex;
   align-self: center;
   font-size: 16px;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -50,12 +48,10 @@ ul.nav-list {
 
 .book-list {
   border: 4px solid black;
-  display: flex;
   flex-direction: column;
 }
 
 .list-Container {
-  display: flex;
   justify-content: space-between;
   padding: 10px 0;
 }
@@ -72,6 +68,7 @@ input[type='submit'],
 
 .delete {
   margin-right: 20px;
+  cursor: pointer;
 }
 
 h1 {
@@ -89,10 +86,10 @@ h2 {
 
 input[type='submit'] {
   align-self: flex-end;
+  cursor: pointer;
 }
 
 form {
-  display: flex;
   flex-direction: column;
 }
 
@@ -127,13 +124,11 @@ footer {
 }
 
 .form-container {
-  display: flex;
   flex-direction: column;
   align-items: center;
 }
 
 .contact-container {
-  display: flex;
   align-items: center;
   flex-direction: column;
 }
@@ -146,4 +141,8 @@ footer {
 #date {
   margin-top: 10px;
   float: right;
+}
+
+.flex {
+  display: flex;
 }
