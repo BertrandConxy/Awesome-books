@@ -41,6 +41,7 @@ class CreateBookElements {
     const bookContainer = document.querySelector('.book-list');
     const listContainer = document.createElement('div');
     listContainer.className = 'list-Container';
+    listContainer.classList.add('flex');
     listContainer.innerHTML += `
             <p>"${book.title}" by ${book.author}</p>
             <button class='delete'>Remove</button>
@@ -62,6 +63,24 @@ class DisplayBookList {
     if (target.classList.contains('delete')) {
       target.parentElement.remove();
     }
+  }
+}
+
+// class to make the web app an SPA
+
+class DisplaySection {
+  static DisplayOnly() {
+    const navItems = document.querySelectorAll('.nav-item');
+    navItems.forEach((item) => {
+      item.addEventListener('click', DisplaySection.nav);
+    });
+  }
+
+  static nav(e) {
+    e.preventDefault();
+    const currentPage = e.target.getAttribute('data-target');
+    document.querySelector('.active').classList.remove('active');
+    document.getElementById(currentPage).classList.add('active');
   }
 }
 
@@ -92,3 +111,9 @@ document.querySelector('.book-list').addEventListener('click', (e) => {
   // remove book from the store
   LocalStorageClass.removeFromTheStore(e.target.parentElement.firstElementChild.textContent);
 });
+
+// displaying one section
+
+document.addEventListener('DOMContentLoaded', DisplaySection.DisplayOnly);
+
+document.getElementById('date').innerHTML = Date();
