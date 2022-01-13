@@ -1,7 +1,7 @@
 ![](https://img.shields.io/badge/Microverse-blueviolet)
 
 # Awesome Books.
-This is a book collection management web application which will help the user to add book with the Title and the Author to the books collection
+> This is a book collection management web application which will help the user to add book with the Title and the Author to the books collection
 and also remove any book from the collection. In addition, he/she will be able to see the book list in the collection on the landing page.
 
 
@@ -27,9 +27,12 @@ cd The-Portfolio in the terminal.
 
 
 ## Project Status
-This project is still under development.
+This project has been  finished and deployed.
 
-## Screenshoot
+## Screenshoots
+![Screenshot (77)](https://user-images.githubusercontent.com/90222110/149329933-d60febc9-3a6d-4e1d-99d2-14568dd28efd.png)
+![Screenshot (78)](https://user-images.githubusercontent.com/90222110/149329962-0fca49b4-9a4f-4dfc-a458-1f821175a9fc.png)
+![Screenshot (79)](https://user-images.githubusercontent.com/90222110/149329986-6ce4be56-60e7-4af2-9eb3-f13aa241f0a4.png)
 
 
 ## Live Demo link
@@ -54,9 +57,10 @@ https://github.com/BertrandConxy/Awesome-books/issues
 
 👤 **Butler Shimaluwani**
 
-- GitHub: 
-- Twitter: 
-- LinkedIn: 
+- GitHub: [@ButlerMuwo](https://github.com/butlermuwo)
+- Twitter: [@ButlerMuwo](https://twitter.com/ButlerMuwo)
+- LinkedIn: [@ButlerMuwo](https://www.linkedin.com/in/butler-shimaluwani-41a680159/)
+
 
 
 ## Show your support
