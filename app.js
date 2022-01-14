@@ -43,7 +43,7 @@ class CreateBookElements {
     listContainer.className = 'list-Container';
     listContainer.classList.add('flex');
     listContainer.innerHTML += `
-            <p>"${book.title}" by ${book.author}</p>
+            <div class="table-text"><span class="table-text-1">${book.title}</span>by  <span class="table-text-2">${book.author}</span></div>
             <button class='delete'>Remove</button>
             `;
 
@@ -109,7 +109,8 @@ document.querySelector('.book-list').addEventListener('click', (e) => {
   DisplayBookList.removeBook(e.target);
 
   // remove book from the store
-  LocalStorageClass.removeFromTheStore(e.target.parentElement.firstElementChild.textContent);
+  const child = e.target.parentElement.children[0].firstElementChild.innerHTML;
+  LocalStorageClass.removeFromTheStore(child);
 });
 
 // displaying one section

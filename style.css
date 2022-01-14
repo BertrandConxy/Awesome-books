@@ -112,6 +112,24 @@ p {
   margin-left: 20px;
 }
 
+.table-text {
+  margin-left: 15px;
+}
+
+.table-text-1,
+.table-text-2 {
+  margin: 0 15px;
+  font-weight: bold;
+}
+
+.table-text-1::before {
+  content: open-quote;
+}
+
+.table-text-1::after {
+  content: close-quote;
+}
+
 li {
   font-weight: bold;
 }
